@@ -1,19 +1,21 @@
- 
-echo "start"
- 
  <html><head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#!
 /bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-
 #=================================================================#
 #   System Required:  CentOS, Debian, Ubuntu                      #
 #   Description: One click Install Shadowsocks-go server          #
+#   Author: Teddysun &lt;i@teddysun.com&gt;
+#   Thanks: @cyfdecyf &lt;https://twitter.com/cyfdecyf&gt;
+#   Intro:  https://teddysun.com/392.html                         #
 #==================================================================
 clear
 echo
 echo "#############################################################"
-echo "# One click Install Shadowsocks-go server"
+echo "# One click Install Shadowsocks-go server
+echo "# Intro: https://teddysun.com/392.html
+echo "# Author: Teddysun &lt;i@teddysun.com&gt;
+echo "# Thanks: @cyfdecyf &lt;https://twitter.com/cyfdecyf&gt;
 echo "#############################################################"
 echo
 # Make sure only root can run our script
@@ -53,7 +55,7 @@ return 1 fi
 #" #"
 }
 #" #"
-# is 64bit or not
+ # is 64bit or not
 function is_64bit(){
     if [ `getconf WORD_BIT` = '32' ] &amp;&amp; [ `getconf LONG_BIT` = '64' ] ; then
         return 0
@@ -72,8 +74,8 @@ fi
 function pre_install(){
     # Set shadowsocks-go config password
     echo "Please input password for shadowsocks-go:"
-    read -p "(Default password: 11111111):" shadowsockspwd
-    [ -z "$shadowsockspwd" ] &amp;&amp; shadowsockspwd="11111111"
+    read -p "(Default password: teddysun.com):" shadowsockspwd
+    [ -z "$shadowsockspwd" ] &amp;&amp; shadowsockspwd="teddysun.com"
     echo
     echo "---------------------------"
     echo "password = $shadowsockspwd"
@@ -134,7 +136,8 @@ stty echo
 function download_files(){
     cd $cur_dir
     if is_64bit; then
-        if ! wget -c https://github.com/shadowsocks/shadowsocks-go/releases/download/1.1.5/shadowsocks-server-linux64-1.1.5.gz;then
+        if ! wget -c http://lamp.teddysun.com/shadowsocks/shadowsocks-server-linux64-
+1.1.5.gz;then
             echo "Failed to download shadowsocks-server-linux64-1.1.5.gz"
 exit 1 fi
         gzip -d shadowsocks-server-linux64-1.1.5.gz
@@ -146,7 +149,8 @@ gzip command."
 exit 1 fi
         mv -f shadowsocks-server-linux64-1.1.5 /usr/bin/shadowsocks-server
     else
-        if ! wget -c https://github.com/shadowsocks/shadowsocks-go/releases/download/1.1.5/shadowsocks-server-linux32-1.1.5.gz;then
+        if ! wget -c http://lamp.teddysun.com/shadowsocks/shadowsocks-server-linux32-
+1.1.5.gz;then
             echo "Failed to download shadowsocks-server-linux32-1.1.5.gz"
 exit 1 fi
         gzip -d shadowsocks-server-linux32-1.1.5.gz
@@ -158,9 +162,6 @@ gzip command."
 exit 1 fi
         mv -f shadowsocks-server-linux32-1.1.5 /usr/bin/shadowsocks-server
     fi
-    
-    
-    
     # Download start script
     if [ "$OS" == 'CentOS' ];then
         if ! wget --no-check-certificate -O shadowsocks-go
@@ -175,9 +176,6 @@ debian; then
  fi }
     echo "Failed to download shadowsocks-go auto start script!"
 exit 1 fi
-
-
-
 # Config shadowsocks
 function config_shadowsocks(){
     if [ ! -d /etc/shadowsocks ];then
@@ -233,7 +231,7 @@ port=${shadowsocksport}/udp
                 echo "WARNING: Try to start firewalld failed. please enable port
 ${shadowsocksport} manually if necessary."
 fi fi
-fi
+ fi
     echo "firewall set completed..."
 }
 # Install
@@ -271,6 +269,7 @@ exit 1 fi
     echo -e "Your Local Port: \033[41;37m 1080 \033[0m"
     echo -e "Your Encryption Method: \033[41;37m aes-256-cfb \033[0m"
     echo
+    echo "Welcome to visit:https://teddysun.com/392.html"
     echo "Enjoy it!"
     echo
     exit 0
